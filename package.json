@@ -1,0 +1,27 @@
+{
+  "name": "halazona",
+  "version": "1.0.0",
+  "description": "Music App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "engines": {
+    "node": "~6.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmadSElsayed/OSProject.git"
+  },
+  "author": "Alpha Queue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AhmadSElsayed/OSProject/issues"
+  },
+  "homepage": "https://github.com/AhmadSElsayed/OSProject#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "musicmetadata": "^2.0.5",
+    "socket.io": "^2.1.0"
+  }
+}
