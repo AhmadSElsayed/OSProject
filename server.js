@@ -33,7 +33,7 @@ app.get('/music/:trackID/meta', function (req, res) {
 
 var synch = require('./src/MusicModule/Synchronizer');
 var io = require('socket.io').listen(server);
-var s = new synch(io, 'song', '0', 'http://localhost:17777/music/?/stream', () =>{
+var s = new synch(io.of('/0'), 'song', 'http://localhost:17777/music/?/stream', () =>{
 
 }, () => {
 

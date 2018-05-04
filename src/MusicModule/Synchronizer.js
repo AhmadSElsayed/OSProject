@@ -1,9 +1,8 @@
 var MusicInstance = require('./MusicInstance');
 class Synchronizer {
-	constructor (nsp, trackID, roomID, baseUrl, onReady, onFinish) {
+	constructor (nsp, trackID, baseUrl, onReady, onFinish) {
 		this._nsp = nsp;
 		this._trackID = trackID;
-		this._roomID = roomID;
 		this._baseUrl = baseUrl;
 		this._musicInstance = new MusicInstance(trackID, onReady, onFinish);
 	}
@@ -14,13 +13,12 @@ class Synchronizer {
 			client.on('play', function (data) {
 				if (that._musicInstance._state == '0')
 					that._musicInstance.play();
-				client.join(that._roomID);
 				client.emit('play', { url: that._baseUrl.replace('?', data.trackID) , position: that._musicInstance.getPosition() });
 				console.log('Song Playing Position', that._musicInstance.getPosition());
 			});
 			client.on('seek', function(data){
 				if(that._musicInstance != undefined) {
-					that._nsp.to(that._roomID).emit('seek', { position: that._musicInstance.seek(data.position) });
+					that._nsp.emit('seek', { position: that._musicInstance.seek(data.position) });
 				}
 			});
 		});
