@@ -1,10 +1,15 @@
+var io = undefined;
+function init(server){
+	io = require('socket.io').listen(server);
+}
 var MusicInstance = require('./MusicInstance');
 class Synchronizer {
-	constructor (nsp, trackID, baseUrl, onReady, onFinish) {
-		this._nsp = nsp;
-		this._trackID = trackID;
+	constructor (nsp, duration, baseUrl, onFinish) {
+		this._nsp = io.of(nsp);
+		this._trackID = undefined;
 		this._baseUrl = baseUrl;
-		this._musicInstance = new MusicInstance(trackID, onReady, onFinish);
+		this._duration = duration;
+		this._musicInstance = new MusicInstance(duration, onFinish);
 	}
 	initialize() {
 		var that = this;
@@ -13,7 +18,7 @@ class Synchronizer {
 			client.on('play', function (data) {
 				if (that._musicInstance._state == '0')
 					that._musicInstance.play();
-				client.emit('play', { url: that._baseUrl.replace('?', data.trackID) , position: that._musicInstance.getPosition(), duration: 320000 });
+				client.emit('play', {url: that._baseUrl.replace('?', data.trackID), position: that._musicInstance.getPosition(), duration: that._duration});
 				console.log('Song Playing Position', that._musicInstance.getPosition());
 			});
 			client.on('seek', function(data){
@@ -24,4 +29,7 @@ class Synchronizer {
 		});
 	}
 }
-module.exports = Synchronizer;
+module.exports = {
+	Synchronizer,
+	init
+};

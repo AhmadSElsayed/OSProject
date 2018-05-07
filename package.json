@@ -21,9 +21,11 @@
   "homepage": "https://github.com/AhmadSElsayed/OSProject#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
     "express": "^4.16.3",
     "musicmetadata": "^2.0.5",
     "npm": "^6.0.0",
+    "passport": "^0.4.0",
     "socket.io": "^2.1.0",
     "sqlite3": "^4.0.0"
   }

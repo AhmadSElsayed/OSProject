@@ -1,8 +1,10 @@
 CREATE TABLE IF NOT EXISTS track (
 	id integer primary key autoincrement,
+	name text unique,
 	artist text,
 	album text,
 	title text,
+	format text,
 	picture blob,
 	duration int
 );
@@ -15,7 +17,7 @@ CREATE TABLE IF NOT EXISTS user (
 
 CREATE TABLE IF NOT EXISTS community(
 	id integer primary key autoincrement,
-	title text,
+	title text unique,
 	controllerId integer null,
 	ownerId integer not null REFERENCES user(id) on delete cascade
 );
